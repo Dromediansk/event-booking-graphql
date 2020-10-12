@@ -1,8 +1,6 @@
 import React, { useContext, useRef, useState } from "react";
 import { AuthContext } from "../context/auth-context";
 
-import "./Auth.scss";
-
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(false);
   const emailEl = useRef();
@@ -62,7 +60,6 @@ const AuthPage = () => {
         return res.json();
       })
       .then((resData) => {
-        console.log(resData);
         const { token, tokenExpiration, userId } = resData.data.login;
         if (token) {
           authContext.login(token, userId, tokenExpiration);
