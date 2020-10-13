@@ -23,26 +23,34 @@ const AuthPage = () => {
 
     let requestBody = {
       query: `
-        query {
-          login(email: "${email}", password: "${password}") {
+        query Login($email: String!, $password: String!) {
+          login(email: $email, password: $password) {
             userId
             token
             tokenExpiration
           }
         }
       `,
+      variables: {
+        email: email,
+        password: password
+      }
     };
 
     if (!isLogin) {
       requestBody = {
         query: `
-        mutation {
-          createUser(userInput: {email: "${email}", password: "${password}"}) {
+        mutation CreateUser($email: String!, $password: String!) {
+          createUser(userInput: {email: $email, password: $password}) {
             _id
             email
           }
         }
-      `,
+      `, 
+      variables: {
+        email: email,
+        password: password
+      }
       };
     }
 
@@ -83,9 +91,9 @@ const AuthPage = () => {
         <label htmlFor="password"></label>
         <input type="password" id="password" ref={passwordEl} />
       </div>
-      <div className="form-actions">
-        <button type="submit">Submit</button>
-        <button type="button" onClick={switchModeHandler}>
+      <div>
+        <button className='btn' type="submit">Submit</button>
+        <button className='btn' type="button" onClick={switchModeHandler}>
           Switch to {isLogin ? "Signup" : "Login"}
         </button>
       </div>

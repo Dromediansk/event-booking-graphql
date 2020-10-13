@@ -20,7 +20,7 @@
   h1 {
     margin: 0;
     font-size: 1.5rem;
-    color: #dfcefc;
+    color: $secondary;
   }
 }
 
@@ -40,7 +40,7 @@
   button {
     font-family: inherit;
     text-decoration: none;
-    color: white;
+    color: $white;
     background: transparent;
     margin: 0;
     padding: 0.25rem 0.5rem;
@@ -49,8 +49,8 @@
     &:hover,
     &:active,
     &.active {
-      background: #ffffff;
-      color: #5101d1;
+      background: $white;
+      color: $primary;
       border-radius: 5px;
     }
   }

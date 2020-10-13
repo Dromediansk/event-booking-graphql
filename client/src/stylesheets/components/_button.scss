@@ -1,3 +1,20 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the button component.
 // -----------------------------------------------------------------------------
+.btn {
+  background-color: $primary;
+  color: $white;
+  font-family: inherit;
+  border: 1px solid $primary;
+  border-radius: 3px;
+  padding: 0.25rem 1rem;
+  margin-right: 1rem;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
+  color: $white;
+  cursor: pointer;
+  &:hover,
+  &:active {
+    background-color: $primary-light;
+    border-color: $primary-light;
+  }
+}
