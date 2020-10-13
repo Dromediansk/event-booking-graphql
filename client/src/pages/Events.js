@@ -139,7 +139,6 @@ const EventsPage = () => {
 
   const showEventDetailHandler = (eventId) => {
     const eventChosen = events.find((ev) => ev._id === eventId);
-    console.log(eventChosen);
     setSelectedEvent(eventChosen);
   };
 
@@ -149,7 +148,6 @@ const EventsPage = () => {
         setSelectedEvent(null);
         return;
       }
-      console.log("selected", selectedEvent);
       const requestBody = {
         query: `
           mutation {
