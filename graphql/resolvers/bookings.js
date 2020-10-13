@@ -16,7 +16,7 @@ module.exports = {
       throw err;
     }
   },
-  bookEvent: async (args) => {
+  bookEvent: async (args, req) => {
     if (!req.isAuth) {
       throw new Error("Unauthenticated!");
     }
@@ -28,7 +28,7 @@ module.exports = {
     const result = await booking.save();
     return transformBooking(result);
   },
-  cancelBooking: async (args) => {
+  cancelBooking: async (args, req) => {
     if (!req.isAuth) {
       throw new Error("Unauthenticated!");
     }
