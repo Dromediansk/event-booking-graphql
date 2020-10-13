@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import BookingList from "../components/Bookings/BookingList/BookingList";
 import { AuthContext } from "../context/auth-context";
 import Spinner from "../layout/Spinner";
 
@@ -8,7 +9,8 @@ const BookingsPage = () => {
 
   const authContext = useContext(AuthContext);
 
-  const fetchBookings = async () => {
+  useEffect(() => {
+    const fetchBookings = async () => {
     try {
       setIsLoading(true);
       const requestBody = {
@@ -47,23 +49,15 @@ const BookingsPage = () => {
     }
   };
 
-  useEffect(() => {
-    fetchBookings();
-  }, []);
+  fetchBookings()
+  }, [authContext.token]);
 
   return (
     <>
       {isLoading ? (
         <Spinner />
       ) : (
-        <ul>
-          {bookings.map((booking) => (
-            <li key={booking._id}>
-              {booking.event.title} -
-              {new Date(booking.createdAt).toLocaleDateString()}
-            </li>
-          ))}
-        </ul>
+        <BookingList bookings={bookings}/>
       )}
     </>
   );
