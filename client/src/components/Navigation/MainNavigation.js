@@ -5,8 +5,6 @@ import { AuthContext } from "../../context/auth-context";
 const MainNavigation = () => {
   const authContext = useContext(AuthContext);
 
-  console.log(authContext);
-
   return (
     <header className="main-navigation">
       <div className="main-navigation__logo">

@@ -6,11 +6,7 @@ const fetchEventlistByIds = async (eventIds) => {
   try {
     const events = await Event.find({ _id: { $in: eventIds } });
     return events.map((event) => {
-      return {
-        ...event._doc,
-        date: dateToString(event._doc.date),
-        creator: findUserById.bind(this, event.creator),
-      };
+      return transformEvent(event);
     });
   } catch (err) {
     throw err;
@@ -20,7 +16,7 @@ const fetchEventlistByIds = async (eventIds) => {
 const findEventById = async (eventId) => {
   try {
     const event = await Event.findById(eventId);
-    return { ...event._doc, creator: findUserById.bind(this, event.creator) };
+    return transformEvent(event);
   } catch (err) {
     throw err;
   }
@@ -31,6 +27,7 @@ const findUserById = async (userId) => {
     const user = await User.findById(userId);
     return {
       ...user._doc,
+      _id: user.id,
       createdEvents: fetchEventlistByIds.bind(this, user._doc.createdEvents),
     };
   } catch (err) {
@@ -41,8 +38,9 @@ const findUserById = async (userId) => {
 const transformEvent = (event) => {
   return {
     ...event._doc,
+    _id: event.id,
     date: dateToString(event._doc.date),
-    creator: findUserById.bind(this, event._doc.creator),
+    creator: findUserById.bind(this, event.creator),
   };
 };
 

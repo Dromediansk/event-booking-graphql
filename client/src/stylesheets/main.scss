@@ -7,13 +7,13 @@
 @import "vendors/normalize";
 
 // 3. Base stuff
-@import "base/base", "base/typography";
+@import "base/base", "base/breakpoints", "base/typography", "base/mixins";
 
 // 4. Layout-related sections
-@import "layout/header", "layout/footer", "layout/forms";
+@import "layout/footer", "layout/forms", "layout/modals", "layout/spinner";
 
 // 5. Components
-@import "components/button";
+@import "components/button", "components/mainNavigation", "components/backdrop";
 
 // 6. Page-specific styles
 @import "pages/auth", "pages/events";

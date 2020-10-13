@@ -2,7 +2,7 @@ import React, { useContext, useRef, useState } from "react";
 import { AuthContext } from "../context/auth-context";
 
 const AuthPage = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const emailEl = useRef();
   const passwordEl = useRef();
 
@@ -33,7 +33,7 @@ const AuthPage = () => {
       `,
     };
 
-    if (isLogin) {
+    if (!isLogin) {
       requestBody = {
         query: `
         mutation {
@@ -60,9 +60,13 @@ const AuthPage = () => {
         return res.json();
       })
       .then((resData) => {
-        const { token, tokenExpiration, userId } = resData.data.login;
-        if (token) {
-          authContext.login(token, userId, tokenExpiration);
+        console.log(resData);
+        if (resData.data.login.token) {
+          authContext.login(
+            resData.data.login.token,
+            resData.data.login.userId,
+            resData.data.login.tokenExpiration
+          );
         }
       })
       .catch((err) => {
